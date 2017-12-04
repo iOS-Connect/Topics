@@ -33,13 +33,8 @@ extension TableViewController: UITableViewDataSource {
         return results.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //if system has existing cell available in memory -> give me one
-        if let existingCell = tableView.dequeueReusableCell(withIdentifier: "identifier") {
-            existingCell.textLabel?.text = results[indexPath.row]
-            return existingCell
-        }
-        //if system not cached yet, I will new one  //the system will cache it behind the scene.
-        let cell = UITableViewCell(style: .default, reuseIdentifier: "identifier")
+        // Hey System give me a cell for this, It may have one that it can re-use or a new one will be made
+        let cell = tableView.dequeueReusableCell(withIdentifier: "identifier", for: indexPath)
         cell.textLabel?.text = results[indexPath.row]
         return cell
     }
